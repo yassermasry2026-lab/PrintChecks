@@ -265,10 +265,6 @@ npm run dev:clear
 
 This automatically clears localStorage on startup. See `scripts/README.md` for details.
 
-### Working with Fonts
-
-The project includes an `expanded_fonts.js` file at the root that provides additional font options. Fonts are loaded dynamically based on user selections in the customization panel.
-
 ### Local Storage Schema
 
 Data is stored in browser localStorage with these keys:
@@ -343,7 +339,6 @@ npm run type-check
 
 **Solution:**
 
-- Ensure `expanded_fonts.js` exists in the root directory
 - Check browser console for font loading errors
 - Clear browser cache and reload
 

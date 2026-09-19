@@ -348,7 +348,6 @@ We welcome contributions! Here's how you can help:
 
 ### Fonts not loading correctly
 
-- Ensure the `expanded_fonts.js` file is present in the project root
 - Check browser console for font loading errors
 - Try clearing browser cache
 

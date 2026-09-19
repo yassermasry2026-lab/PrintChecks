@@ -163,7 +163,7 @@ src/
 
 ### Pinia Store Architecture
 
-PrintChecks uses **five primary stores**:
+PrintChecks uses **four primary stores**:
 
 #### 1. App Store (`stores/app.ts`)
 
@@ -188,28 +188,6 @@ PrintChecks uses **five primary stores**:
 - `addVendor(vendor: Vendor)`
 - `updateVendor(id: string, updates: Partial<Vendor>)`
 - `deleteVendor(id: string)`
-
-#### 2. Check Store (`stores/check.ts`)
-
-**Purpose**: Check creation and printing logic
-
-**State:**
-
-```typescript
-{
-  currentCheck: CheckData
-  lastCheckNumber: Record<string, number> // Per bank account
-  printSettings: PrintSettings
-}
-```
-
-**Key Actions:**
-
-- `createCheck(data: Partial<CheckData>)`
-- `updateCheckField(field: keyof CheckData, value: any)`
-- `printCheck()`
-- `resetCheck()`
-- `getNextCheckNumber(accountId: string): number`
 
 #### 3. Customization Store (`stores/customization.ts`)
 
@@ -285,33 +263,6 @@ PrintChecks uses **five primary stores**:
 - `getPaymentsByVendor(vendorId: string): Payment[]`
 - `getPaymentAnalytics(): AnalyticsData`
 
-### Store Communication
-
-Stores can reference each other when needed:
-
-```typescript
-// In check.ts store
-import { useHistoryStore } from './history'
-import { useAppStore } from './app'
-
-export const useCheckStore = defineStore('check', () => {
-  const historyStore = useHistoryStore()
-  const appStore = useAppStore()
-
-  const printCheck = () => {
-    // Create check...
-    const payment = {
-      /* ... */
-    }
-
-    // Log to history
-    historyStore.addPayment(payment)
-  }
-
-  return { printCheck }
-})
-```
-
 ---
 
 ## 🧩 Component Structure
@@ -386,14 +337,6 @@ App.vue
 ```vue
 // Child emit('save', formData); // Parent
 <VendorModal @save="handleSave" @cancel="handleCancel" />
-```
-
-**Store Access**: Any component can access stores
-
-```typescript
-import { useCheckStore } from '@/stores/check'
-
-const checkStore = useCheckStore()
 ```
 
 ---
