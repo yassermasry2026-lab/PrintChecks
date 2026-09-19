@@ -18,5 +18,9 @@ export * from './storage'
 // Utilities
 export * from './utils'
 
+// Migration (schema versioning)
+export * from './migration/types';
+export * from './migration/registry';
+
 // Version
 export const VERSION = '1.0.0'
