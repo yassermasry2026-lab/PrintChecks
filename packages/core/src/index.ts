@@ -24,6 +24,8 @@ export * from './migration/registry';
 export * from './migration/errors';
 export * from './migration/v0-to-v1';
 export * from './migration/AppDataMigrator';
+export * from './migration/backup';
+export * from './migration/bootstrap';
 
 // Version
 export const VERSION = '1.0.0'
