@@ -11,6 +11,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    env:
+      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v4
@@ -46,10 +48,10 @@ jobs:
         run: pnpm run build
 
       - name: Create Release Pull Request or Publish to npm
-        # Guarded: this step is skipped until an NPM_TOKEN secret
-        # is configured. See docs/adr (publishing not in scope
-        # until Phase 6+).
-        if: ${{ secrets.NPM_TOKEN != '' }}
+        # Guarded: this step is skipped when NPM_TOKEN is
+        # absent. `secrets` is not available in step `if:`,
+        # so we promote it via job-level `env`.
+        if: ${{ env.NPM_TOKEN != '' }}
         id: changesets
         uses: changesets/action@v1
         with:
